@@ -1,14 +1,14 @@
-
+import { Button } from 'semantic-ui-react'
 
 function Nopost({toggleButton}) {
     return (
         <div>
      <section className="no-post">
          <div className="no_post_details">
-         <h3>I have Found Nothing here</h3>
+         <h3>작성된 게시물이 없습니다.</h3>
           <br />
           <section className="buttin-wrapper">
-          <button className="button"  onClick={toggleButton}>Make a post</button>
+          <Button onClick={toggleButton}>게시글 작성</Button>
           </section>
          </div>
      </section>

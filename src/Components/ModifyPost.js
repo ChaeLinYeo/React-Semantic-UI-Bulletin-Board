@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'semantic-ui-react'
 
 function ModifyPost({title,content,updatePost, savePostTitle, saveContent}) {
     return (
@@ -15,9 +16,7 @@ function ModifyPost({title,content,updatePost, savePostTitle, saveContent}) {
                placeholder="content" rows="8"           cols="41"required></textarea>
                <br />
                <br />
-               <section className="button-wrapper">
-                    <button className="button">ModifyPost</button>
-               </section>
+               <Button>수정</Button>
            </form>
         </div>
     )

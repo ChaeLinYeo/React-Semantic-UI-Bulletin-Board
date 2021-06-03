@@ -4,6 +4,7 @@ import CreatePost from './CreatePost'
 import ModifyPost from './ModifyPost'
 import Nopost from './Nopost'
 import Post from './Post'
+import { Button, Grid } from 'semantic-ui-react'
 
 
 function AllPost() {
@@ -54,8 +55,9 @@ const editPost = id =>{
     toogleModifyPost()
 
 }
-// updatepost function
 
+
+// updatepost function
 const updatePost = (event)=>{
     event.preventDefault() //it stop auto reload
 
@@ -114,10 +116,8 @@ return(
        <>
        {!allPost.length ? 
       <Nopost toggleButton={toggleButton}  /> :
-          ( <div><h1>all posts</h1>
-            <section className="button-wrapper">
-               <button onClick={toggleButton} className="button">Create New</button>
-              </section>
+          ( <div><h1>모든 게시글</h1>
+            <Button onClick={toggleButton}>게시글 작성</Button>
               {/* all post section */}
             <section className="all-post">
              {allPost.map(post => {
@@ -134,7 +134,7 @@ return(
                     />
                     );
                 })}          
-                </section>              
+                </section>       
                 </div> 
               )} 
             </>
