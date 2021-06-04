@@ -1,19 +1,24 @@
-import { Button } from 'semantic-ui-react'
+import { Button, Container, Segment, Input, Form, TextArea, Header, Divider } from 'semantic-ui-react'
 
-const CreatePost =({savePostTitle, saveContent, savePost})=> {
+const CreatePost =({savePostTitle, saveWriter, saveContent, savePost})=> {
     return (
-        <div className="create-post">
+        <>
+        <Container text>
+            <Segment>
            <form onSubmit={savePost}>
-                <h1>게시글 작성하기</h1>
-               <input type="text"onChange={savePostTitle} size="39" placeholder="제목" required></input>
-               <br />
-               <br />
-               <textarea type="text"onChange={saveContent} placeholder="내용" rows="8" cols="41"required></textarea>
-               <br />
-               <br />
-               <Button>저장</Button>
+                <Header as='h1' floated='middle'>게시글 작성하기</Header>
+                <Divider clearing/>
+                <Input type="text" onChange={savePostTitle} size="39" placeholder='제목' required></Input>
+                <Input type="text" onChange={saveWriter} size="39" placeholder='작성자' required></Input>
+                <Form>
+                   <TextArea type="text" onChange={saveContent} placeholder='내용' rows='8' cols='41' required></TextArea>
+                </Form>
+               <Button color='green'><i aria-hidden="true" class="edit icon"></i>저장</Button>
            </form>
-        </div>
+           </Segment>
+        </Container>
+
+        </>
     )
 }
 

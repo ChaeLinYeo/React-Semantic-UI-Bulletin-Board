@@ -1,6 +1,6 @@
 import React from 'react';
-import Comment from './Comment';
-import { Component } from 'react';
+import Comm from './Comm';
+import { Container, Header, Segment, Divider, Button, Form, Input } from 'semantic-ui-react'
 
 class Detail extends React.Component {
     componentDidMount(){
@@ -19,97 +19,100 @@ class Detail extends React.Component {
      }
     }
 
-    inputComment = (e) => {
-        e.preventDefault()
-        const commentBox = [...this.state.comments]
-        commentBox.push({id: Date.now(), user: "익명", content: this.inputCommentRef.current.value})
-        this.setState({comments : commentBox})
-        this.inputCommentRef.current.value = ""
-    }
+    // inputComment = (e) => {
+    //     e.preventDefault()
+    //     const commentBox = [...this.state.comments]
+    //     commentBox.push({id: Date.now(), user: "익명", content: this.inputCommentRef.current.value})
+    //     this.setState({comments : commentBox})
+    //     this.inputCommentRef.current.value = ""
+    // }
 
     handleDelete = (event) => {
         const commentBox = [...this.state.comments]
-        const filterBox = commentBox.filter((comment) => comment.id !== Number(event.target.className))
+        const filterBox = commentBox.filter((comm) => comm.id !== Number(event.target.className))
         this.setState({comments : filterBox})
     }
 
-    addComment(){
-        let value = document.querySelector('#new-comment-content').value;
-        this.setState({comments: [...this.state.comments, {
-            uuid: this.state.comments.length + 1,
-            writer: '여채린',
+    // addComment(){
+    //     let value = document.querySelector('#new-comment-content').value;
+    //     this.setState({comments: [...this.state.comments, {
+    //         uuid: this.state.comments.length + 1,
+    //         writer: '여채린',
+    //         date: new Date().toISOString().slice(0, 10),
+    //         content: value
+    //     }]})
+    // }
+
+    
+
+    inputComment = (e) =>{
+        e.preventDefault()
+        // let value = document.querySelector('#new-comment-content').value;
+        // this.setState({comments: [...this.state.comments, {
+        //     id: this.state.comments.length + 1,
+        //     user: '여채린',
+        //     date: new Date().toISOString().slice(0, 10),
+        //     content: value
+        // }]})
+
+        const commentBox = [...this.state.comments, {
+            id: Date.now(),
+            user: "익명",
             date: new Date().toISOString().slice(0, 10),
-            content: value
-        }]})
+            content: this.inputCommentRef.current.value
+        }]
+        // commentBox.push({id: Date.now(), user: "익명", date: new Date().toISOString().slice(0, 10), content: this.inputCommentRef.current.value})
+        this.setState({comments : commentBox})
+        this.inputCommentRef.current.value = "" //댓글 작성후 입력창 초기화
     }
+
+
+
+
+
+    
 
 
     render(){
         const {location}=this.props;
         if (location.state){
             return(
-                <div>
-                    <h1>{location.state.title}</h1>
-                    <div class="ui container">
+                <Container text>
+                    <Segment>
+                        <Header as='h1' floated='middle'>{location.state.title}</Header>
+                        <Divider clearing/>
+                        <p>작성자: {location.state.writer}</p>
                         <p>{location.state.content}</p>
-                    </div>
-                    
-                    
-                    {/* <Button></Button> */}
 
-                    {/* <div class="ui comments">
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="https://react.semantic-ui.com/images/avatar/small/steve.jpg"/></a>
-                                <div class="content">
-                                    <a class="author">Steve Jobes</a>
-                                    <div class="metadata">
-                                        <div>2 days ago</div>
-                                        </div>
-                                        <div class="text">Revolutionary!</div>
-                                        <div class="actions">
-                                            <a class="active">Reply</a>
-                                        </div>
-                                        <form class="ui reply form">
-                                            <div class="field">
-                                                <textarea rows="3"></textarea>
-                                            </div>
-                                            <button class="ui icon primary left labeled button">
-                                                <i aria-hidden="true" class="edit icon"></i>
-                                                Add Reply
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div> */}
+                    <br />
+                    <br />
+                    <Header as='h4' dividing>댓글</Header>
+                    <Comm commentList = {this.state.comments} onDelete={this.handleDelete}/>
                     
-
-
-                    <ul className="comments_container">
-                        <Comment commentList = {this.state.comments} onDelete={this.handleDelete}/>
-                    </ul>
                     <div className="sta status_comment_input">
-                    <form onSubmit={this.inputComment}>
-                        <form class="ui reply form">
-                            <div class="field">
+                    <Form onSubmit={this.inputComment}>
+                        {/* <form class="ui reply form"> */}
+                            {/* <div class="field"> */}
                                 <input
                                     type="text"
                                     className="comment_input"
                                     placeholder="댓글 달기..."
                                     ref={this.inputCommentRef}
                                 />
-                            </div>
-                        </form>
+                                {/* <Input type="text" className="comment_input" placeholder="댓글 달기..." ref={this.inputCommentRef}></Input> */}
+                            {/* </div> */}
 
+                        {/* </form> */}
+                        
+                        <br />
+                        <br />
+                        <Button color='blue'><i aria-hidden="true" class="edit icon"></i>등록</Button>
 
-                        <button class="ui icon primary left labeled button">
-                            <i aria-hidden="true" class="edit icon"></i>
-                            등록
-                        </button>
-                    </form>  
+                    </Form>  
                     </div>
-                    
-                </div>
+
+                    </Segment>
+                </Container>
             )
         }
     }
